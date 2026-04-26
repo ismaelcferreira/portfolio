@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Portfólio de Ismael Correia Ferreira — Estudante de Tecnologia na Escola SESI. Projetos de desenvolvimento, banco de dados, IoT e modelagem de sistemas." />
+  <meta property="og:title" content="Ismael Correia Ferreira — Portfólio" />
+  <meta property="og:description"
+    content="Portfólio pessoal com projetos acadêmicos e de desenvolvimento tecnológico." />
+  <meta name="theme-color" content="#1a1412" />
+  <title>Ismael Correia Ferreira — Portfólio</title>
+
+  <!-- Preload fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+    rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="src/styles/tokens.css" />
+  <link rel="stylesheet" href="src/styles/global.css" />
+  <link rel="stylesheet" href="src/styles/scenes.css" />
+  <link rel="stylesheet" href="src/styles/overlay.css" />
+</head>
+
+<body>
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div id="cursor" aria-hidden="true">
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+  </div>
+
+  <!-- ===== AMBIENT BACKGROUND ===== -->
+  <canvas id="ambient-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Orbs -->
+  <div class="ambient-orb orb-1" aria-hidden="true"></div>
+  <div class="ambient-orb orb-2" aria-hidden="true"></div>
+  <div class="ambient-orb orb-3" aria-hidden="true"></div>
+
+  <!-- ===== HEADER ===== -->
+  <header id="main-header" role="banner">
+    <a href="#scene-hero" class="header-logo" aria-label="Voltar ao início">
+      <div class="header-logo-mark" aria-hidden="true">ICF</div>
+      <span class="header-logo-text">Ismael Correia Ferreira</span>
+    </a>
+    <div class="header-actions">
+      <button id="theme-toggle" aria-label="Mudar tema">
+        <!-- icon injected by JS -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== FLOATING NAV ===== -->
+  <nav id="floating-nav" aria-label="Navegação de seções">
+    <div class="nav-dot-wrapper">
+      <div class="nav-dot active" data-scene="0" role="button" tabindex="0" aria-label="Sobre Mim"></div>
+      <span class="nav-label">Sobre Mim</span>
+    </div>
+    <div class="nav-dot-wrapper">
+      <div class="nav-dot" data-scene="1" role="button" tabindex="0" aria-label="Skills"></div>
+      <span class="nav-label">Skills</span>
+    </div>
+    <div class="nav-dot-wrapper">
+      <div class="nav-dot" data-scene="2" role="button" tabindex="0" aria-label="Portfólio"></div>
+      <span class="nav-label">Portfólio</span>
+    </div>
+    <div class="nav-dot-wrapper">
+      <div class="nav-dot" data-scene="3" role="button" tabindex="0" aria-label="Explorar"></div>
+      <span class="nav-label">Explorar</span>
+    </div>
+    <div class="nav-dot-wrapper">
+      <div class="nav-dot" data-scene="4" role="button" tabindex="0" aria-label="Contato"></div>
+      <span class="nav-label">Contato</span>
+    </div>
+  </nav>
+
+  <!-- ===== SCROLL WRAPPER ===== -->
+  <main id="scroll-wrapper" role="main">
+
+    <!-- ======================================================
+         SCENE 0: HERO
+         ====================================================== -->
+    <section class="scene" id="scene-hero" data-scene="0" aria-label="Apresentação">
+      <div class="hero-container">
+
+        <!-- Left: Content -->
+        <div class="hero-content">
+          <div class="badge badge-accent hero-badge scene-element" style="animation-delay:0.1s">
+            <span class="badge-dot"></span>
+            Disponível para projetos
+          </div>
+
+          <h1 class="hero-name scene-element" style="animation-delay:0.2s">
+            <span class="hero-name-line">Ismael</span>
+            <span class="hero-name-line">Correia</span>
+            <span class="hero-name-line accent">Ferreira</span>
+          </h1>
+
+          <p class="hero-subtitle scene-element" style="animation-delay:0.35s">
+            Estudante de Tecnologia apaixonado por <strong>desenvolvimento de sistemas</strong>,
+            banco de dados e IoT. Explorando o mundo da tecnologia um projeto de cada vez.
+          </p>
+
+          <div class="hero-school scene-element" style="animation-delay:0.45s">
+            <span class="hero-school-dot"></span>
+            Escola SESI &mdash; Técnico em Desenvolvimento de Sistemas
+          </div>
+
+
+          <div class="hero-socials scene-element" style="animation-delay:0.65s">
+            <span>Redes</span>
+            <a href="https://github.com/IsmaelCorreiaFerreira" target="_blank" rel="noopener" class="social-link"
+              aria-label="GitHub">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </a>
+            <a href="https://linkedin.com/" target="_blank" rel="noopener" class="social-link" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Visual -->
+        <div class="hero-visual" aria-hidden="true">
+          <!-- Cross SVG -->
+          <div class="hero-cross-container scene-element" style="animation-delay:0.3s">
+            <svg class="hero-cross-svg" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <!-- Cross shape - artistic/sketch style -->
+              <defs>
+                <linearGradient id="crossGrad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#8b5a2b" stop-opacity="0.9" />
+                  <stop offset="50%" stop-color="#b87333" stop-opacity="0.7" />
+                  <stop offset="100%" stop-color="#c8864a" stop-opacity="0.5" />
+                </linearGradient>
+                <filter id="roughen">
+                  <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="4" seed="5" result="noise" />
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R"
+                    yChannelSelector="G" />
+                </filter>
+              </defs>
+
+              <!-- Glow circles -->
+              <circle cx="170" cy="170" r="160" stroke="url(#crossGrad)" stroke-width="0.5" stroke-dasharray="4 8"
+                opacity="0.3" />
+              <circle cx="170" cy="170" r="130" stroke="url(#crossGrad)" stroke-width="0.3" stroke-dasharray="2 6"
+                opacity="0.2" />
+
+              <!-- Main cross -->
+              <g filter="url(#roughen)">
+                <!-- Vertical beam -->
+                <rect x="150" y="40" width="40" height="260" rx="6" fill="url(#crossGrad)" opacity="0.85" />
+                <!-- Horizontal beam -->
+                <rect x="60" y="130" width="220" height="40" rx="6" fill="url(#crossGrad)" opacity="0.85" />
+              </g>
+
+              <!-- Sketch lines for artistic effect -->
+              <line x1="132" y1="38" x2="130" y2="302" stroke="#b87333" stroke-width="0.8" stroke-dasharray="3 5"
+                opacity="0.3" />
+              <line x1="208" y1="40" x2="210" y2="300" stroke="#b87333" stroke-width="0.8" stroke-dasharray="3 5"
+                opacity="0.3" />
+              <line x1="58" y1="128" x2="282" y2="126" stroke="#b87333" stroke-width="0.8" stroke-dasharray="3 5"
+                opacity="0.3" />
+              <line x1="60" y1="172" x2="280" y2="174" stroke="#b87333" stroke-width="0.8" stroke-dasharray="3 5"
+                opacity="0.3" />
+
+              <!-- Corner dots -->
+              <circle cx="170" cy="40" r="3" fill="#b87333" opacity="0.6" />
+              <circle cx="170" cy="300" r="3" fill="#b87333" opacity="0.6" />
+              <circle cx="60" cy="170" r="3" fill="#b87333" opacity="0.6" />
+              <circle cx="280" cy="170" r="3" fill="#b87333" opacity="0.6" />
+              <!-- Center -->
+              <circle cx="170" cy="170" r="5" fill="#c8864a" opacity="0.8" />
+              <circle cx="170" cy="170" r="12" stroke="#b87333" stroke-width="1" fill="none" opacity="0.4" />
+            </svg>
+          </div>
+
+          <!-- Avatar -->
+          <div class="hero-avatar-ring scene-element" style="animation-delay:0.4s">
+            <img src="IMG-20240824-WA0001.jpg" alt="Foto de Ismael Correia Ferreira" class="hero-avatar"
+              onerror="this.style.display='none'; this.parentElement.querySelector('.avatar-fallback')?.style.setProperty('display','flex')" />
+            <!-- Fallback when no avatar -->
+            <div class="avatar-fallback"
+              style="display:none; position:absolute; inset:3px; border-radius:50%; background:var(--accent-primary-light); border: 2px solid var(--border-accent); align-items:center; justify-content:center; font-size:80px; z-index:1;">
+              🧑‍💻</div>
+          </div>
+
+          <!-- Floating tags -->
+          <div class="hero-floating-tag tag-1 scene-element" style="animation-delay:0.7s">
+            <span class="tag-icon">⚡</span> Full Stack Dev
+          </div>
+          <div class="hero-floating-tag tag-2 scene-element" style="animation-delay:0.85s">
+            <span class="tag-icon">🎓</span> Escola SESI
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="scroll-indicator" aria-hidden="true">
+        <span>Scroll</span>
+        <div class="scroll-indicator-line"></div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCENE 1: SKILLS
+         ====================================================== -->
+    <section class="scene" id="scene-skills" data-scene="1" aria-label="Habilidades">
+      <div class="skills-container">
+
+        <div class="section-header">
+          <p class="section-label scene-element" style="animation-delay:0.05s">Minhas Competências</p>
+          <h2 class="section-title scene-element" style="animation-delay:0.15s">Skills &amp; Tecnologias</h2>
+          <p class="section-desc scene-element" style="animation-delay:0.25s">
+            Conjunto de tecnologias que domino e aplico em projetos reais, do front-end à automação.
+          </p>
+          <div class="cv-container scene-element" style="animation-delay:0.3s; margin-top: 24px;">
+        <a href="caminho/para/o-seu-curriculo.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; background-color: var(--accent-primary); color: #fff; text-decoration: none; border-radius: 8px; font-weight: 600; font-size: 14px; transition: 0.3s ease;">
+            📄 Ver Meu Currículo
+        </a>
+    </div>
+        </div>
+
+        <div class="skills-grid">
+
+          <!-- Frontend -->
+          <article class="skill-card scene-element" style="animation-delay:0.3s">
+            <div class="skill-icon">🌐</div>
+            <h3 class="skill-title">Frontend</h3>
+            <p class="skill-desc">Desenvolvimento de interfaces modernas, responsivas e acessíveis com foco em
+              experiência do usuário.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">HTML5</span>
+              <span class="skill-tag">CSS3</span>
+              <span class="skill-tag">JavaScript</span>
+              <span class="skill-tag">React</span>
+            </div>
+          </article>
+
+          <!-- Backend -->
+          <article class="skill-card scene-element" style="animation-delay:0.4s">
+            <div class="skill-icon">⚙️</div>
+            <h3 class="skill-title">Backend</h3>
+            <p class="skill-desc">APIs robustas e servidores eficientes com foco em performance e segurança de dados.
+            </p>
+            <div class="skill-tags">
+              <span class="skill-tag">Node.js</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">REST APIs</span>
+              <span class="skill-tag">Express</span>
+            </div>
+          </article>
+
+          <!-- Database -->
+          <article class="skill-card scene-element" style="animation-delay:0.5s">
+            <div class="skill-icon">🗄️</div>
+            <h3 class="skill-title">Database</h3>
+            <p class="skill-desc">Modelagem e gerenciamento de bancos relacionais e não-relacionais com foco em
+              performance.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">MySQL</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">MongoDB</span>
+              <span class="skill-tag">SQL</span>
+            </div>
+          </article>
+
+          <!-- Automation / IoT -->
+          <article class="skill-card scene-element" style="animation-delay:0.6s">
+            <div class="skill-icon">📡</div>
+            <h3 class="skill-title">IoT &amp; Automação</h3>
+            <p class="skill-desc">Desenvolvimento de soluções embarcadas conectadas à internet das coisas com protocolos
+              modernos.</p>
+            <div class="skill-tags">
+              <span class="skill-tag">Arduino</span>
+              <span class="skill-tag">ESP32</span>
+              <span class="skill-tag">MQTT</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCENE 2: PORTFOLIO
+         ====================================================== -->
+    <section class="scene" id="scene-portfolio" data-scene="2" aria-label="Portfólio">
+      <div class="portfolio-container">
+
+        <div class="section-header">
+          <p class="section-label scene-element" style="animation-delay:0.05s">Projetos</p>
+          <h2 class="section-title scene-element" style="animation-delay:0.15s">Portfólio</h2>
+          <p class="section-desc scene-element" style="animation-delay:0.25s">
+            Projetos desenvolvidos ao longo da minha trajetória acadêmica e profissional.
+          </p>
+        </div>
+
+        <div class="portfolio-grid">
+
+          <!-- Project 1 - 2024 -->
+          <article class="p-card scene-element" style="animation-delay:0.3s">
+            <div class="p-card-year">2024</div>
+            <div class="p-card-header">
+              <h3 class="p-card-title">Portfólio Canva</h3>
+              <span class="p-card-badge completed">Concluído</span>
+            </div>
+            <p class="p-card-desc">
+              Meu primeiro contato com a criação de portfólios. O foco foi explorar a criatividade, o design visual e a
+              organização inicial das minhas ideias.
+            </p>
+
+            <div class="p-card-footer">
+              <a href="https://canva.link/e7yuw1w0i16ajn2" target="_blank" class="p-card-link">Ver projeto →</a>
+              <span style="font-size:12px; color:var(--text-quaternary)">2024</span>
+            </div>
+          </article>
+
+          <!-- Project 2 - 2025 -->
+          <article class="p-card scene-element" style="animation-delay:0.4s">
+            <div class="p-card-year">2025</div>
+            <div class="p-card-header">
+              <h3 class="p-card-title">Portfólio Google Sites</h3>
+              <span class="p-card-badge completed">Concluído</span>
+            </div>
+            <p class="p-card-desc">
+              O passo seguinte foi entender como estruturar um site de verdade. Usei o Google Sites para criar uma
+              navegação melhor e organizar meus projetos de forma mais interativa.
+            </p>
+
+            <div class="p-card-footer">
+              <a href="https://sites.google.com/estudante.sesisenai.org.br/porfolio-do-ismael/in%C3%ADcio"
+                target="_blank" class="p-card-link">Ver projeto →</a>
+              <span style="font-size:12px; color:var(--text-quaternary)">2025</span>
+            </div>
+          </article>
+
+          <!-- Project 3 - 2026 -->
+          <article class="p-card scene-element" style="animation-delay:0.5s">
+            <div class="p-card-year">2026</div>
+            <div class="p-card-header">
+              <h3 class="p-card-title">Portfólio Interativo</h3>
+              <span class="p-card-badge current">
+                <span class="badge-dot-sm"></span>
+                ATUAL
+              </span>
+            </div>
+            <p class="p-card-desc">
+              Este portfólio! Desenvolvido com HTML, CSS e JavaScript puro. Design system completo com tema dark/light,
+              animações e overlay de atividades acadêmicas.
+            </p>
+            <div class="p-card-tags">
+              <span class="p-card-tag">HTML5</span>
+              <span class="p-card-tag">CSS3</span>
+              <span class="p-card-tag">JavaScript</span>
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCENE 3: EXPLORE (BENTO)
+         ====================================================== -->
+    <section class="scene" id="scene-explore" data-scene="3" aria-label="Explorar matérias">
+      <div class="explore-container">
+
+        <div class="section-header">
+          <p class="section-label scene-element" style="animation-delay:0.05s">Conteúdo Acadêmico</p>
+          <h2 class="section-title scene-element" style="animation-delay:0.15s">Explorar Matérias</h2>
+          <p class="section-desc scene-element" style="animation-delay:0.25s">
+            Clique em qualquer matéria para ver as atividades organizadas por trimestre.
+          </p>
+        </div>
+
+        <div class="bento-grid" role="list">
+
+          <!-- Matemática -->
+          <div class="bento-tile scene-element" data-subject="matematica" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Matemática" style="animation-delay:0.3s">
+            <div class="bento-icon">📐</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">Exatas</span>
+            <h3 class="bento-title">Matemática</h3>
+            <p class="bento-desc">Funções, geometria e probabilidade</p>
+          </div>
+
+          <!-- Natureza -->
+          <div class="bento-tile scene-element" data-subject="natureza" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Ciências da Natureza" style="animation-delay:0.36s">
+            <div class="bento-icon">🧬</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">Bio · Fís · Quím</span>
+            <h3 class="bento-title">Ciências da Natureza</h3>
+            <p class="bento-desc">Biologia, Física e Química integradas</p>
+          </div>
+
+          <!-- Humanas -->
+          <div class="bento-tile scene-element" data-subject="humanas" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Ciências Humanas" style="animation-delay:0.42s">
+            <div class="bento-icon">🌎</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">Hist · Geo · Fil</span>
+            <h3 class="bento-title">Ciências Humanas</h3>
+            <p class="bento-desc">História, Filosofia e Sociologia</p>
+          </div>
+
+          <!-- Linguagens -->
+          <div class="bento-tile scene-element" data-subject="linguagens" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Linguagens" style="animation-delay:0.48s">
+            <div class="bento-icon">📖</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">Port · Ing · Lit</span>
+            <h3 class="bento-title">Linguagens</h3>
+            <p class="bento-desc">Português, Inglês e Literatura</p>
+          </div>
+
+          <!-- IoT -->
+          <div class="bento-tile scene-element" data-subject="iot" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria IoT" style="animation-delay:0.54s">
+            <div class="bento-icon">📡</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">Arduino · ESP32</span>
+            <h3 class="bento-title">IoT</h3>
+            <p class="bento-desc">Internet das Coisas e embarcados</p>
+          </div>
+
+          <!-- Modelagem -->
+          <div class="bento-tile scene-element" data-subject="modelagem" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Modelagem" style="animation-delay:0.60s">
+            <div class="bento-icon">🗂️</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">UML · BPMN</span>
+            <h3 class="bento-title">Modelagem</h3>
+            <p class="bento-desc">UML, BPMN e prototipagem</p>
+          </div>
+
+          <!-- Banco de Dados -->
+          <div class="bento-tile scene-element" data-subject="bancoDeDados" role="listitem button" tabindex="0"
+            aria-label="Abrir matéria Banco de Dados" style="animation-delay:0.66s">
+            <div class="bento-icon">🗄️</div>
+            <div class="bento-arrow">↗</div>
+            <span class="bento-meta">SQL · NoSQL</span>
+            <h3 class="bento-title">Banco de Dados</h3>
+            <p class="bento-desc">SQL, NoSQL e administração de BD</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         SCENE 4: CONTACT
+         ====================================================== -->
+    <section class="scene" id="scene-contact" data-scene="4" aria-label="Contato">
+      <div class="contact-container">
+
+        <div class="badge badge-accent contact-badge scene-element" style="animation-delay:0.05s">
+          <span class="badge-dot"></span>
+          Vamos Conversar
+        </div>
+
+        <h2 class="contact-title scene-element" style="animation-delay:0.2s">
+          Entre em<br><span>Contato</span>
+        </h2>
+
+        <p class="contact-desc scene-element" style="animation-delay:0.35s">
+          Seja para projetos, colaborações acadêmicas ou apenas para trocar uma ideia sobre tecnologia — estou
+          disponível!
+        </p>
+
+        <div class="contact-grid scene-element" style="animation-delay:0.5s">
+
+          <a href="mailto:ismael@example.com" class="contact-tile" aria-label="Enviar e-mail">
+            <div class="contact-tile-icon">✉️</div>
+            <span class="contact-tile-label">Email</span>
+            <span class="contact-tile-value">ismael_c_ferrreira@estudante.sesisenai.com.br</span>
+          </a>
+
+          <a href="https://linkedin.com/" target="_blank" rel="noopener" class="contact-tile" aria-label="LinkedIn">
+            <div class="contact-tile-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent-glow)">
+                <path
+                  d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </div>
+            <span class="contact-tile-label">LinkedIn</span>
+            <span class="contact-tile-value">/in/ismael-ferreira</span>
+          </a>
+
+          <a href="https://github.com/IsmaelCorreiaFerreira" target="_blank" rel="noopener" class="contact-tile"
+            aria-label="GitHub">
+            <div class="contact-tile-icon">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" style="color:var(--accent-glow)">
+                <path
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
+            </div>
+            <span class="contact-tile-label">GitHub</span>
+            <span class="contact-tile-value">/IsmaelCorreiaFerreira</span>
+          </a>
+
+        </div>
+
+        <footer class="contact-footer scene-element" style="animation-delay:0.7s">
+          <p>&copy; 2026 Ismael Correia Ferreira &mdash; Feito com dedicação e esforço</p>
+        </footer>
+
+      </div>
+    </section>
+
+  </main><!-- end #scroll-wrapper -->
+
+  <!-- ======================================================
+       OVERLAY SYSTEM
+       ====================================================== -->
+  <div id="overlay-backdrop" role="presentation" aria-hidden="true"></div>
+
+  <aside id="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="overlay-subject-name">
+    <div class="overlay-header">
+      <div class="overlay-header-left">
+        <span class="overlay-subject-label" id="overlay-subject-label">Matéria</span>
+        <h2 class="overlay-subject-name" id="overlay-subject-name">Carregando...</h2>
+      </div>
+      <button id="overlay-close" class="overlay-close" aria-label="Fechar painel">✕</button>
+    </div>
+
+    <div class="overlay-selector">
+      <p class="selector-label">Trimestre</p>
+      <div class="trimester-pills" id="trimester-pills" role="group" aria-label="Selecionar trimestre">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+
+    <div class="overlay-content" id="overlay-content">
+      <!-- Injected by JS -->
+    </div>
+  </aside>
+
+  <!-- ===== MAIN JS (inlined for file:// compatibility) ===== -->
+  <script>
+    // ===== ACTIVITIES DATA =====
+  var activitiesData = {
+  matematica: {
+    "1": [
+      {
+        subject: "Jogo — Quebrando a Banca (Probabilidade)",
+        description: "Criamos um jogo inspirado no filme Quebrando a Banca, utilizando conceitos de probabilidade e análise combinatória. O trabalho foi dinâmico e ajudou a aplicar a matemática na prática, desenvolvendo o raciocínio lógico de forma criativa.",
+        habilidades: [
+          "C5: Aplicar o pensamento probabilístico para quantificar e fazer previsões em situações aplicadas a diferentes áreas do conhecimento e da vida cotidiana.",
+          "H30: Identificar dados, regularidades e relações numa situação que envolva o raciocínio combinatório, utilizando os processos de contagem.",
+          "H31: Reconhecer fenômenos e eventos de caráter aleatório, compreendendo o significado e a importância da probabilidade como meio de prever resultados."
+        ],
+        preview: {
+          text: "Blackjack Pro — jogo matemático com contagem de cartas e análise combinatória.",
+          link: "https://drive.google.com/file/d/1-zr4wS6cZbFgX0arx3cIE9BGOjozogtS/view?usp=drive_link"
+        }
+      },
+      {
+        subject: "Atividade sobre o filme — Quebrando a Banca",
+        description: "Analisamos o filme Quebrando a Banca, relacionando matemática e probabilidade com situações reais de jogo. O filme mostra como o uso de estratégias, como a contagem de cartas, pode influenciar resultados e decisões. Foi uma atividade interessante que conectou teoria e prática de forma dinâmica.",
+        habilidades: [
+          "H31: Reconhecer fenômenos e eventos de caráter aleatório, compreendendo o significado e a importância da probabilidade como meio de prever resultados.",
+          "H32: Identificar em diferentes áreas científicas e outras atividades práticas modelos e problemas que fazem uso de estatísticas e probabilidades."
+        ],
+        preview: {
+          text: "Documento de análise do filme com foco em probabilidade e combinatória.",
+          link: "https://docs.google.com/document/d/1pqG_mWFm3sJ7JL8XGYJNEtfC4I5zZB1ZKaMYFit6rVw/edit?usp=sharing"
+        }
+      }
+    ],
+    "2": [],
+    "3": []
+  },
+  natureza: {
+    "1": [
+      {
+        subject: "Meme Literário — Evolução e Darwinismo",
+        description: "Estudamos as ideias evolucionistas e analisamos evidências da evolução de forma dinâmica. A criação de um meme ajudou a entender o conteúdo de maneira mais leve e atual, tornando o aprendizado mais interessante.",
+        habilidades: [
+          "C3: Determinar os impactos das ações humanas nos ambientes, identificando suas causas e propondo soluções para a sua redução.",
+          "H15: Comparar propostas de intervenção ambiental aplicando conhecimentos científicos e tecnológicos, observando os riscos e benefícios de sua implementação.",
+          "H18: Identificar situações de risco ambiental na cidade onde reside."
+        ],
+        preview: {
+          text: "Meme sobre a Marcha do Progresso (agora digital), conectando evolução biológica à dependência tecnológica.",
+          link: "https://docs.google.com/document/d/1sR7w5AllreU2NXpofI41q6QCnMh3iIQCSkotTeXiK-s/edit?usp=sharing"
+        }
+      },
+      {
+        subject: "Apresentação da Dependência Energética",
+        description: "Analisamos a relação entre guerras e recursos energéticos, como petróleo e gás. Discutimos como esses recursos influenciam conflitos, a economia e o preço dos combustíveis, além de refletir sobre seus impactos na sociedade e possíveis alternativas.",
+        habilidades: [
+          "C1: Entender a ciência e a tecnologia como construções humanas.",
+          "C2: Aplicar conceitos científicos para explicar fenômenos do cotidiano.",
+          "H9: Compreender energia e suas transformações.",
+          "H11: Investigar, levantar hipóteses e tirar conclusões.",
+          "H1: Interpretar diferentes formas de informação (textos, gráficos, dados)."
+        ],
+        preview: {
+          text: "Apresentação em Canva sobre dependência energética, petróleo e conflitos globais.",
+          link: "https://canva.link/aqp3r6b0yluvr1s"
+        }
+      }
+    ],
+    "2": [],
+    "3": []
+  },
+  humanas: {
+    "1": [
+      {
+        subject: "Análise de País: Suíça",
+        description: "Trabalho focado no estudo aprofundado sobre a Suíça. A pesquisa abrangeu dados fundamentais, características demográficas, sociedade, fontes de energia e a matriz energética do país, consolidando o aprendizado sobre a geografia e economia europeia.",
+        habilidades: [
+          "Pesquisa Geográfica",
+          "Análise Demográfica",
+          "Apresentação Visual",
+          "Trabalho em Equipe"
+        ],
+        preview: {
+          text: "Apresentação de slides detalhada sobre a geografia, sociedade e matriz energética da Suíça.",
+          link: "https://canva.link/i054cc100fah9qy"
+        }
+      },
+      {
+        subject: "The World Tribune: O Pós-Guerra",
+        description: "Projeto criativo em formato de jornal (\"The World Tribune\" - Edição de Jan/1920) que retrata os impactos imediatos da Primeira Guerra Mundial. Os artigos abordam temas como o medo do bolchevismo, a reconstrução das cidades, o luto coletivo (Soldado Desconhecido) e as mudanças sociais na juventude e no entretenimento.",
+        habilidades: [
+          "Pesquisa Histórica",
+          "Escrita Jornalística",
+          "Design Editorial",
+          "Síntese de Contexto"
+        ],
+        preview: {
+          text: "Jornal editorial criado no Canva retratando os eventos e o clima social europeu no ano de 1920.",
+          link: "https://canva.link/wd4ivl4jw0wi3wv"
+        }
+      },
+      {
+        subject: "Análise do Cartaz: Nossa Causa é Justa",
+        description: "Análise interdisciplinar de um cartaz de propaganda soviética de 1941. O estudo explorou o uso do Realismo Socialista, a simbologia do Exército Vermelho e a psicologia das cores para entender como a comunicação visual foi utilizada para mobilização popular e unidade nacional durante a Segunda Guerra Mundial.",
+        habilidades: [
+          "Analisar o funcionamento das linguagens e sua relação com contextos históricos.",
+          "Interpretar diferentes formas de informação (textos, imagens e símbolos).",
+          "Compreender o papel da propaganda na construção de ideologias e mobilização social."
+        ],
+        preview: {
+          text: "Análise detalhada sobre a simbologia e o contexto histórico da propaganda soviética.",
+          link: "https://docs.google.com/document/d/1Sd6ec3WQ8SWVRUDODf3YZ0oWDXlqCp11u1rChxEYP3g/edit?usp=sharing"
+        }
+      }
+    ],
+    "2": [],
+    "3": []
+  },
+  linguagens: {
+    "1": [
+      {
+        subject: "Game Literário — Barroco (Wordwall)",
+        description: "Criamos um jogo no Wordwall sobre o Barroco, revisando suas principais características de forma interativa. O trabalho em grupo ajudou na organização e tornou a atividade mais dinâmica e criativa.",
+        habilidades: [
+          "H15: Produzir trabalhos individuais e coletivos, explorando materiais e técnicas ligados ao universo das composições artísticas e de práticas corporais."
+        ],
+        preview: {
+          text: "Jogo interativo no Wordwall sobre as características do Barroco — clique para acessar.",
+          link: "https://canva.link/9p24lvjrtr10vu6"
+        }
+      },
+      {
+        subject: "A Paixão Segundo G.H. — Análise Interdisciplinar",
+        description: "Analisamos A Paixão Segundo G.H. relacionando a experiência da personagem com a fisiologia e a neurociência. Discutimos reações como nojo e luta ou fuga, entendendo como o corpo responde à situação. Foi um trabalho que uniu literatura e ciência de forma interessante e reflexiva.",
+        habilidades: [
+          "H4: Interpretar textos literários de diferentes gêneros e estilos.",
+          "H22: Relacionar informações de natureza científica, social e cultural."
+        ],
+        preview: {
+          text: "Análise literária e científica da obra de Clarice Lispector com enfoque na neurociência.",
+          link: "https://drive.google.com/file/d/18NO-vxr_UoI5TOHgqoUCdt4XOivSfbes/view?usp=sharing"
+        }
+      }
+    ],
+    "2": [],
+    "3": []
+  },
+  modelagem: {
+    "1": [
+      {
+        subject: "TaskSync — Sistema de Gestão de Tarefas",
+        description: "Desenvolvemos essa atividade em grupo criando a ideia de um sistema de gestão de tarefas chamado TaskSync. Pensamos em como ele funcionaria, quem usaria e quais problemas ele resolveria. Organizamos regras, funcionalidades e até a parte visual do sistema. Fizemos isso para entender melhor como criar um sistema desde o começo. Aprendemos sobre organização de projetos, lógica de sistemas e como transformar uma ideia em algo mais estruturado.",
+        habilidades: [
+          "Modelagem de sistemas: definição de requisitos, regras de negócio e funcionalidades.",
+          "Organização de projetos: planejamento estruturado de um sistema do início.",
+          "Lógica de sistemas: análise de fluxos, atores e casos de uso.",
+          "Trabalho em equipe: desenvolvimento colaborativo e tomada de decisão coletiva.",
+          "Prototipagem visual: representação da interface e identidade do sistema."
+        ],
+        preview: {
+          text: "TaskSync — protótipo de sistema de gestão de tarefas desenvolvido em grupo, com interface, regras e funcionalidades planejadas.",
+          link: "https://satasksync.netlify.app"
+        }
+      }
+    ],
+    "2": [],
+    "3": []
+  },
+  bancoDeDados: {
+    "1": [],
+    "2": [],
+    "3": []
+  },
+  iot: {
+    "1": [],
+    "2": [],
+    "3": []
+  }
+};
+    var state = { currentScene: 0, totalScenes: 5, overlayOpen: false, overlaySubject: null, overlayTrimester: "1", theme: localStorage.getItem("portfolio-theme") || "dark" };
+    var subjectMap = { matematica: { name: "Matemática", icon: "📐", meta: "Exatas" }, natureza: { name: "Ciências da Natureza", icon: "🧬", meta: "Bio · Fís · Quím" }, humanas: { name: "Ciências Humanas", icon: "🌎", meta: "Hist · Geo · Fil" }, linguagens: { name: "Linguagens", icon: "📖", meta: "Port · Ing · Lit" }, modelagem: { name: "Modelagem de Sistemas", icon: "🗂️", meta: "UML · BPMN" }, bancoDeDados: { name: "Banco de Dados", icon: "🗄️", meta: "SQL · NoSQL" }, iot: { name: "IoT", icon: "📡", meta: "Arduino · ESP32" } };
+    var trimesterLabel = { "1": "1º TRI", "2": "2º TRI", "3": "3º TRI" };
+
+    function getActivities(subject, trimester) { return (activitiesData[subject] && activitiesData[subject][trimester]) ? activitiesData[subject][trimester] : []; }
+
+    document.addEventListener("DOMContentLoaded", function () { applyTheme(state.theme); initCursor(); initCanvas(); initThemeToggle(); initScrollTracking(); initNavDots(); initBentoSpotlight(); initCardTilt(); initOverlay(); initKeyboard(); });
+
+    function applyTheme(theme) { state.theme = theme; document.documentElement.setAttribute("data-theme", theme); localStorage.setItem("portfolio-theme", theme); var btn = document.getElementById("theme-toggle"); if (btn) { btn.innerHTML = theme === "dark" ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>' : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'; btn.setAttribute("aria-label", "Mudar para tema " + (theme === "dark" ? "claro" : "escuro")); } }
+
+    function initThemeToggle() { var btn = document.getElementById("theme-toggle"); if (!btn) return; btn.addEventListener("click", function () { applyTheme(state.theme === "dark" ? "light" : "dark"); }); }
+
+    function initCanvas() { var canvas = document.getElementById("ambient-canvas"); if (!canvas) return; var ctx = canvas.getContext("2d"); function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; } resize(); window.addEventListener("resize", resize, { passive: true }); var particles = []; for (var i = 0; i < 35; i++) { particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4, radius: Math.random() * 2.5 + 0.5, alpha: Math.random() * 0.4 + 0.1 }); } function draw() { ctx.clearRect(0, 0, canvas.width, canvas.height); var isDark = state.theme === "dark"; var pc = isDark ? "200,150,80" : "139,90,43"; var lc = isDark ? "184,115,51" : "122,72,32"; particles.forEach(function (p) { p.x += p.vx; p.y += p.vy; if (p.x < 0 || p.x > canvas.width) p.vx *= -1; if (p.y < 0 || p.y > canvas.height) p.vy *= -1; ctx.beginPath(); ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2); ctx.fillStyle = "rgba(" + pc + "," + p.alpha + ")"; ctx.fill(); particles.forEach(function (q) { var dx = p.x - q.x, dy = p.y - q.y, dist = Math.sqrt(dx * dx + dy * dy); if (dist < 140 && dist > 0) { ctx.beginPath(); ctx.moveTo(p.x, p.y); ctx.lineTo(q.x, q.y); ctx.strokeStyle = "rgba(" + lc + "," + (0.06 * (1 - dist / 140)) + ")"; ctx.lineWidth = 1; ctx.stroke(); } }); }); requestAnimationFrame(draw); } draw(); }
+
+    function initScrollTracking() { var scenes = document.querySelectorAll(".scene"); var observer = new IntersectionObserver(function (entries) { entries.forEach(function (entry) { if (entry.isIntersecting && entry.intersectionRatio >= 0.35) { var idx = parseInt(entry.target.dataset.scene); if (!isNaN(idx)) { state.currentScene = idx; updateNavDots(idx); revealSceneElements(entry.target); } } }); }, { threshold: [0.35, 0.6] }); scenes.forEach(function (scene) { observer.observe(scene); }); }
+
+    function revealSceneElements(sceneEl) { var elements = sceneEl.querySelectorAll(".scene-element"); elements.forEach(function (el, i) { var delay = (parseFloat(el.style.animationDelay) || i * 0.08) * 1000; setTimeout(function () { el.classList.add("revealed"); }, delay); }); }
+
+    function initNavDots() { document.querySelectorAll(".nav-dot").forEach(function (dot) { dot.addEventListener("click", function () { scrollToScene(parseInt(dot.dataset.scene)); }); }); }
+
+    function updateNavDots(activeIdx) { document.querySelectorAll(".nav-dot").forEach(function (dot) { dot.classList.toggle("active", parseInt(dot.dataset.scene) === activeIdx); }); }
+
+    function scrollToScene(idx) { var scene = document.querySelector('[data-scene="' + idx + '"]'); if (scene) scene.scrollIntoView({ behavior: "smooth" }); }
+
+    function initBentoSpotlight() { document.querySelectorAll(".bento-tile").forEach(function (tile) { tile.addEventListener("mousemove", function (e) { var rect = tile.getBoundingClientRect(); tile.style.setProperty("--mx", ((e.clientX - rect.left) / rect.width * 100) + "%"); tile.style.setProperty("--my", ((e.clientY - rect.top) / rect.height * 100) + "%"); }); }); }
+
+    function initCardTilt() { document.querySelectorAll(".skill-card,.p-card").forEach(function (card) { card.addEventListener("mousemove", function (e) { var rect = card.getBoundingClientRect(), cx = rect.left + rect.width / 2, cy = rect.top + rect.height / 2, dx = (e.clientX - cx) / (rect.width / 2), dy = (e.clientY - cy) / (rect.height / 2); card.style.setProperty("--tilt-x", (-dy * 8) + "deg"); card.style.setProperty("--tilt-y", (dx * 8) + "deg"); card.style.setProperty("--mx", ((e.clientX - rect.left) / rect.width * 100) + "%"); card.style.setProperty("--my", ((e.clientY - rect.top) / rect.height * 100) + "%"); }); card.addEventListener("mouseleave", function () { card.style.setProperty("--tilt-x", "0deg"); card.style.setProperty("--tilt-y", "0deg"); }); }); }
+
+    function initCursor() { var dot = document.getElementById("cursor-dot"), ring = document.getElementById("cursor-ring"); if (!dot || !ring) return; var mouseX = -100, mouseY = -100, ringX = -100, ringY = -100; function animate() { ringX += (mouseX - ringX) * 0.12; ringY += (mouseY - ringY) * 0.12; dot.style.transform = "translate(" + mouseX + "px," + mouseY + "px) translate(-50%,-50%)"; ring.style.transform = "translate(" + ringX + "px," + ringY + "px) translate(-50%,-50%)"; requestAnimationFrame(animate); } document.addEventListener("mousemove", function (e) { mouseX = e.clientX; mouseY = e.clientY; }); var sel = "a,button,[data-cursor-hover],.bento-tile,.skill-card,.p-card,.contact-tile,.social-link,.nav-dot"; document.addEventListener("mouseover", function (e) { if (e.target.closest && e.target.closest(sel)) document.body.classList.add("cursor-hover"); }); document.addEventListener("mouseout", function (e) { if (e.target.closest && e.target.closest(sel)) document.body.classList.remove("cursor-hover"); }); var cur = document.getElementById("cursor"); if (cur) { document.addEventListener("mouseleave", function () { cur.style.opacity = "0"; }); document.addEventListener("mouseenter", function () { cur.style.opacity = "1"; }); } animate(); }
+
+    function initOverlay() { var bd = document.getElementById("overlay-backdrop"), cl = document.getElementById("overlay-close"); if (bd) bd.addEventListener("click", closeOverlay); if (cl) cl.addEventListener("click", closeOverlay); document.querySelectorAll(".bento-tile[data-subject]").forEach(function (tile) { tile.addEventListener("click", function () { openOverlay(tile.dataset.subject); }); }); }
+
+    function openOverlay(subject) { state.overlayOpen = true; state.overlaySubject = subject; state.overlayTrimester = "1"; var info = subjectMap[subject]; if (!info) return; var lel = document.getElementById("overlay-subject-label"), nel = document.getElementById("overlay-subject-name"); if (lel) lel.textContent = info.meta; if (nel) nel.textContent = info.name; renderActivities(); renderTrimesterSelector(); document.getElementById("overlay-backdrop").classList.add("open"); document.getElementById("overlay-panel").classList.add("open"); document.body.style.overflow = "hidden"; }
+
+    function closeOverlay() { state.overlayOpen = false; document.getElementById("overlay-backdrop").classList.remove("open"); document.getElementById("overlay-panel").classList.remove("open"); document.body.style.overflow = ""; }
+
+    function renderTrimesterSelector() { var c = document.getElementById("trimester-pills"); if (!c) return; c.innerHTML = "";["1", "2", "3"].forEach(function (tri) { var btn = document.createElement("button"); btn.className = "trimester-btn" + (tri === state.overlayTrimester ? " active" : ""); var lockIcon = (tri === "2" || tri === "3") ? ' <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-left:3px;opacity:0.7"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>' : ""; btn.innerHTML = trimesterLabel[tri] + lockIcon; btn.addEventListener("click", function () { state.overlayTrimester = tri; renderTrimesterSelector(); renderActivities(); }); c.appendChild(btn); }); }
+
+    function renderActivities() { var content = document.getElementById("overlay-content"); if (!content) return; content.innerHTML = '<div class="overlay-loading"><div class="loading-spinner"></div></div>'; setTimeout(function () { var acts = getActivities(state.overlaySubject, state.overlayTrimester); if (!acts.length) { content.innerHTML = '<div class="overlay-empty"><div class="overlay-empty-icon">📭</div><p>Nenhuma atividade cadastrada para este trimestre ainda.</p></div>'; return; } var list = document.createElement("div"); list.className = "activities-list"; acts.forEach(function (act) { list.appendChild(buildActivityCard(act, state.overlayTrimester)); }); content.innerHTML = ""; content.appendChild(list); }, 300); }
+
+    function buildActivityCard(act, trimester) { var card = document.createElement("div"); card.className = "activity-card"; var sh = ""; if (act.habilidades && act.habilidades.length) { sh = '<div class="activity-field"><span class="field-label">Habilidades</span><ul class="skills-list">' + act.habilidades.map(function (h) { return '<li class="skill-item">' + h + '</li>'; }).join("") + '</ul></div>'; } var ph = ""; if (act.preview) { ph = '<div class="activity-preview"><span class="preview-label">Preview</span>'; if (act.preview.image) { ph += '<a href="' + (act.preview.link || act.preview.image) + '" target="_blank" class="preview-image-link"><img src="' + act.preview.image + '" alt="Preview" class="preview-image" loading="lazy"></a>'; } if (act.preview.link && !act.preview.image) { ph += '<a href="' + act.preview.link + '" target="_blank" class="preview-link-btn">🔗 Ver documento</a>'; } ph += '<div class="preview-content">' + act.preview.text + '</div></div>'; } card.innerHTML = '<div class="activity-header"><h3 class="activity-title">' + act.subject + '</h3><span class="activity-badge">' + trimesterLabel[trimester] + '</span></div><div class="activity-field"><span class="field-label">Descrição</span><p class="field-content">' + act.description + '</p></div>' + sh + ph; return card; }
+
+    function initKeyboard() { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && state.overlayOpen) closeOverlay(); if ((e.key === "Enter" || e.key === " ") && document.activeElement) { var el = document.activeElement; if (el.classList.contains("bento-tile") && el.dataset.subject) { e.preventDefault(); openOverlay(el.dataset.subject); } if (el.classList.contains("nav-dot")) { e.preventDefault(); el.click(); } } }); }
+
+    // Reveal first scene on load
+    window.addEventListener("load", function () { var hero = document.getElementById("scene-hero"); if (hero) revealSceneElements(hero); });
+  </script>
+</body>
+
+</html>
