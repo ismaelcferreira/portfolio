@@ -510,7 +510,8 @@ function initOverlay() {
 function openOverlay(subject) {
   state.overlayOpen = true;
   state.overlaySubject = subject;
-  state.overlayTrimester = '1';
+  var actsTri2 = getActivities(subject, "2");
+  state.overlayTrimester = (actsTri2 && actsTri2.length > 0) ? "2" : "1";
   var info = subjectMap[subject];
   if (!info) return;
   var labelEl = document.getElementById('overlay-subject-label');
@@ -535,6 +536,21 @@ function closeOverlay() {
   document.body.style.overflow = '';
 }
 
+function getLinkBtnClass(url, type) {
+  if (type === 'canva' || (url && (url.indexOf('canva.link') !== -1 || url.indexOf('canva.com') !== -1))) return 'btn-canva';
+  if (type === 'youtube' || (url && (url.indexOf('youtu.be') !== -1 || url.indexOf('youtube.com') !== -1))) return 'btn-youtube';
+  if (type === 'docs' || (url && (url.indexOf('docs.google.com') !== -1 || url.indexOf('drive.google.com') !== -1))) return 'btn-docs';
+  return 'btn-web';
+}
+
+function getLinkIcon(url, type) {
+  if (type === 'canva' || (url && url.indexOf('canva.link') !== -1)) return '🎨';
+  if (type === 'youtube' || (url && (url.indexOf('youtu.be') !== -1 || url.indexOf('youtube.com') !== -1))) return '▶️';
+  if (type === 'docs' || (url && (url.indexOf('docs.google.com') !== -1 || url.indexOf('drive.google.com') !== -1))) return '📄';
+  if (url && url.indexOf('onrender.com') !== -1) return '🚀';
+  return '🌐';
+}
+
 function renderTrimesterSelector() {
   var container = document.getElementById('trimester-pills');
   if (!container) return;
@@ -542,7 +558,11 @@ function renderTrimesterSelector() {
   ['1', '2', '3'].forEach(function(tri) {
     var btn = document.createElement('button');
     btn.className = 'trimester-btn' + (tri === state.overlayTrimester ? ' active' : '');
-    btn.textContent = trimesterLabel[tri];
+    var count = getActivities(state.overlaySubject, tri).length;
+    var badge = count > 0 
+      ? ' <span style="font-size:11px; opacity:0.85; margin-left:3px; background:rgba(255,255,255,0.15); padding:1px 6px; border-radius:10px;">' + count + '</span>' 
+      : ' <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;margin-left:3px;opacity:0.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>'; 
+    btn.innerHTML = trimesterLabel[tri] + badge;
     btn.setAttribute('aria-label', 'Ver ' + trimesterLabel[tri]);
     btn.addEventListener('click', function() {
       state.overlayTrimester = tri;
@@ -570,30 +590,82 @@ function renderActivities() {
     });
     content.innerHTML = '';
     content.appendChild(list);
-  }, 300);
+  }, 200);
 }
 
 function buildActivityCard(act, trimester) {
   var card = document.createElement('div');
   card.className = 'activity-card';
-  var skillsHTML = '';
+
+  var html = '<div class="activity-header">';
+  html += '<h3 class="activity-title">' + act.subject + '</h3>';
+  html += '<span class="activity-badge">' + trimesterLabel[trimester] + '</span>';
+  html += '</div>';
+
+  html += '<div class="activity-field">';
+  html += '<span class="field-label">Descrição</span>';
+  html += '<p class="field-content">' + act.description + '</p>';
+  html += '</div>';
+
   if (act.habilidades && act.habilidades.length) {
-    var items = act.habilidades.map(function(h) { return '<li class="skill-item">' + h + '</li>'; }).join('');
-    skillsHTML = '<div class="activity-field"><span class="field-label">Habilidades</span><ul class="skills-list">' + items + '</ul></div>';
+    html += '<div class="activity-field">';
+    html += '<span class="field-label">Competências & Habilidades</span>';
+    html += '<div class="skills-tags-grid">';
+    act.habilidades.forEach(function (h) {
+      html += '<div class="skill-tag-pill"><span class="skill-pill-bullet"></span>' + h + '</div>';
+    });
+    html += '</div></div>';
   }
-  var previewHTML = '';
-  if (act.preview) {
-    previewHTML = '<div class="activity-preview"><span class="preview-label">Preview</span>';
-    if (act.preview.image) {
-      var href = act.preview.link || act.preview.image;
-      previewHTML += '<a href="' + href + '" target="_blank" class="preview-image-link"><img src="' + act.preview.image + '" alt="Preview" class="preview-image" loading="lazy"></a>';
-    }
-    if (act.preview.link && !act.preview.image) {
-      previewHTML += '<a href="' + act.preview.link + '" target="_blank" class="preview-link-btn">🔗 Ver documento</a>';
-    }
-    previewHTML += '<div class="preview-content">' + act.preview.text + '</div></div>';
+
+  var linksList = act.links || [];
+  if (!linksList.length && act.preview && act.preview.link) {
+    linksList = [{ label: act.preview.text || "Ver Projeto", url: act.preview.link, type: "web" }];
   }
-  card.innerHTML = '<div class="activity-header"><h3 class="activity-title">' + act.subject + '</h3><span class="activity-badge">' + trimesterLabel[trimester] + '</span></div><div class="activity-field"><span class="field-label">Descrição</span><p class="field-content">' + act.description + '</p></div>' + skillsHTML + previewHTML;
+
+  if (linksList.length > 0) {
+    html += '<div class="activity-field">';
+    html += '<span class="field-label">Links & Recursos Externos</span>';
+    html += '<div class="activity-links-group">';
+    linksList.forEach(function (l) {
+      var btnClass = getLinkBtnClass(l.url, l.type);
+      var icon = getLinkIcon(l.url, l.type);
+      html += '<a href="' + l.url + '" target="_blank" rel="noopener" class="activity-btn ' + btnClass + '">';
+      html += '<span class="btn-icon">' + icon + '</span>';
+      html += '<span>' + l.label + '</span>';
+      html += '<span class="btn-arrow">↗</span>';
+      html += '</a>';
+    });
+    html += '</div></div>';
+  }
+
+  var mediaList = act.images || [];
+  if (!mediaList.length && act.preview && act.preview.image) {
+    mediaList = [{ src: act.preview.image, alt: act.subject }];
+  }
+
+  if (mediaList.length > 0) {
+    html += '<div class="activity-media-section">';
+    html += '<span class="field-label">Mídia / Imagens do Projeto</span>';
+    mediaList.forEach(function (img) {
+      html += '<div class="activity-media-container">';
+      html += '<img src="' + img.src + '" alt="' + (img.alt || act.subject) + '" class="activity-media-img" loading="lazy" onerror="this.style.display=\'none\'; if(this.nextElementSibling) this.nextElementSibling.style.display=\'flex\';" />';
+      html += '<div class="activity-media-placeholder" style="display:none;">';
+      html += '  <div class="placeholder-badge"><span class="placeholder-icon">📷</span> Indicação de Imagem</div>';
+      html += '  <div class="placeholder-path-info">Caminho: <code>' + img.src + '</code></div>';
+      html += '  <div class="placeholder-caption">' + (img.alt || act.subject) + '</div>';
+      html += '</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+  }
+
+  if (act.preview && act.preview.text && !act.links && !linksList.length) {
+    html += '<div class="activity-preview-note">';
+    html += '💬 <em>' + act.preview.text + '</em>';
+    html += '</div>';
+  }
+
+  card.innerHTML = html;
   return card;
 }
 
